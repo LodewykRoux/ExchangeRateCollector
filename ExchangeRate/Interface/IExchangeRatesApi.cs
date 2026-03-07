@@ -1,4 +1,4 @@
-namespace ExchangeRateCollector;
+namespace ExchangeRateCollector.ExchangeRate.Interface;
 
 public interface IExchangeRatesApi
 {
