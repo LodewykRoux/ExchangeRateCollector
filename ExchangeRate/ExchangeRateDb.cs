@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using ExchangeRateCollector.ExchangeRate.Interface;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
@@ -59,12 +60,14 @@ public class ExchangeRateDb(ILogger<ExchangeRateDb> logger) : IExchangeRateDb
                 id: _cosmosDbContainerName,
                 partitionKeyPath: "/id"
             );
+            
+            var now = DateTime.UtcNow;
 
             var exchangeRateDocument = new ExchangeRateDocument
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = now.ToString("MM-dd-yyyy",CultureInfo.InvariantCulture),
                 BaseCurrency = _exchangeRateApiBaseCurrency.Trim().ToUpperInvariant(),
-                Date = DateTime.UtcNow,
+                Date = now,
                 ExchangeRates = exchangeRates
             };
 
