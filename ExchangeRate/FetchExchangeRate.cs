@@ -12,7 +12,7 @@ public class FetchExchangeRate(
     private readonly ILogger _logger = loggerFactory.CreateLogger<FetchExchangeRate>();
 
     [Function("FetchExchangeRate")]
-    public async Task Run([TimerTrigger("0 0 2 * * *")] TimerInfo myTimer)
+    public async Task Run([TimerTrigger("0 0 2 * * *", RunOnStartup = true)] TimerInfo myTimer)
     {
         _logger.LogInformation("C# Timer trigger function executed at: {executionTime}", DateTime.Now);
 
